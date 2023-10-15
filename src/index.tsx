@@ -1,9 +1,9 @@
 // Packages:
 import { Component, JSX } from 'solid-js'
 
-
 // Typescript:
-export interface AppleProps extends JSX.IframeHTMLAttributes<HTMLIFrameElement> {
+export interface AppleProps
+  extends JSX.IframeHTMLAttributes<HTMLIFrameElement> {
   [key: string]: any
   link: string
   wide?: boolean
@@ -13,19 +13,24 @@ export interface AppleProps extends JSX.IframeHTMLAttributes<HTMLIFrameElement> 
   allow?: string
 }
 
-
 // Functions:
-const AppleMusic: Component<AppleProps> = (props) => {
-
+const AppleMusic: Component<AppleProps> = props => {
   // Constants:
 
-  const style = typeof props.style === 'string' ? (
-    'border-radius: 8px;' + `width: ${props.width ?? props.wide ? window.innerWidth - 16 : 100}px;` + props.style
-  ) : ({
-    'border-radius': '8px',
-    'width': `${props.width ?? props.wide ? window.innerWidth - 16 : 100}px`,
-    ...props.style
-  } as JSX.CSSProperties)
+  const style =
+    typeof props.style === 'string'
+      ? 'border-radius: 8px;' +
+        `width: ${
+          props.width ?? props.wide ? window.innerWidth - 16 : 100
+        }px;` +
+        props.style
+      : ({
+          'border-radius': '8px',
+          width: `${
+            props.width ?? props.wide ? window.innerWidth - 16 : 100
+          }px`,
+          ...props.style,
+        } as JSX.CSSProperties)
   console.log(style)
 
   const src = props.link.replace('//music.apple.com', '//embed.music.apple.com')
@@ -33,22 +38,20 @@ const AppleMusic: Component<AppleProps> = (props) => {
   // Return:
   return (
     <iframe
-      title='Apple Music Player'
-      allow='autoplay *; encrypted-media *;'
+      title="Apple Music Player"
+      allow="autoplay *; encrypted-media *;"
       frameBorder={props.frameBorder ?? 0}
       height={props.height ?? 170}
       style={style}
-      sandbox='allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation'
+      sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation"
       src={src}
       {...props}
     />
   )
 }
 
-
 // Exports:
 export default AppleMusic
-
 
 // Testing:
 // const App = () => {
